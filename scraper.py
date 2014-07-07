@@ -58,7 +58,8 @@ for day in days:
   if details.has_key("date"):
     data.append(details)
 
-print data
+for datum in data
+  print datum
 
 # Write out to the sqlite database using scraperwiki library
 scraperwiki.sqlite.save(unique_keys=['date'], data=data)
