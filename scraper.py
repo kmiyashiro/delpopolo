@@ -10,6 +10,9 @@ import datetime
 # Read in a page
 html = scraperwiki.scrape("http://www.delpopolosf.com/", None, "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-us) AppleWebKit/534.27+ (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27")
 
+# Test page
+# html = open('test/fixture.html').read()
+
 # Remove non-numbers from day, like "th" from "May 30th"
 non_number = re.compile(r'(\d)[^\d]+')
 
@@ -19,7 +22,7 @@ current_year = str(datetime.datetime.now().year)
 def get_day_elements(html_string):
   # Create tree
   root = lxml.html.fromstring(html_string)
-  schedule = root.cssselect("#weekly_schedule")[0]
+  schedule = root.cssselect("#locations")[0]
 
   # Remove info paragraph
   schedule.cssselect(".first")[0].drop_tree()
