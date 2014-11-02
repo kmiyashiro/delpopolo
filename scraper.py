@@ -5,13 +5,15 @@ import scraperwiki
 import lxml.html
 import re
 import datetime
+import logging
 
+logging.basicConfig(level='DEBUG')
 
 # Read in a page
 html = scraperwiki.scrape("http://www.delpopolosf.com/", None, "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-us) AppleWebKit/534.27+ (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27")
 
 # Test page
-# html = open('test/fixture.html').read()
+html = open('test/fixture.html').read()
 
 # Remove non-numbers from day, like "th" from "May 30th"
 non_number = re.compile(r'(\d)[^\d]+')
@@ -69,13 +71,13 @@ for day in days:
     day_date = datetime.datetime.strptime(date_time_text, "%A, %B %d %Y %I:%M %p")
     details["date"] = day_date.isoformat()
   except ValueError as e:
-    print 'Failed to format date'
+    logging.warning('Failed to format date')
 
   if details.has_key("date"):
     data.append(details)
 
 for datum in data:
-  print datum
+  logging.info(datum)
 
 # Write out to the sqlite database using scraperwiki library
 scraperwiki.sqlite.save(unique_keys=['date'], data=data)
