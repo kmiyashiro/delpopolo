@@ -13,7 +13,7 @@ logging.basicConfig(level='DEBUG')
 html = scraperwiki.scrape("http://www.delpopolosf.com/", None, "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_7; en-us) AppleWebKit/534.27+ (KHTML, like Gecko) Version/5.0.4 Safari/533.20.27")
 
 # Test page
-html = open('test/fixture.html').read()
+# html = open('test/fixture.html').read()
 
 # Remove non-numbers from day, like "th" from "May 30th"
 non_number = re.compile(r'(\d)[^\d]+')
